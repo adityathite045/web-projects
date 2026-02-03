@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Percentage Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: palegreen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 420px;
+            background-color: white;
+            border: 2px solid lightblue;
+        }
+
+        th, td {
+            border: 1px solid lightblue;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: lightblue;
+        }
+
+        input {
+            width: 80px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div>
+    <h2 style="text-align:center;">Percentage Calculator</h2>
+
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Marks (0–100)</th>
+        </tr>
+        <tr>
+            <td>English</td>
+            <td><input type="number" id="eng" min="0" max="100"></td>
+        </tr>
+        <tr>
+            <td>Maths</td>
+            <td><input type="number" id="math" min="0" max="100"></td>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td><input type="number" id="phy" min="0" max="100"></td>
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td><input type="number" id="chem" min="0" max="100"></td>
+        </tr>
+        <tr>
+            <td>IT</td>
+            <td><input type="number" id="it" min="0" max="100"></td>
+        </tr>
+        <tr class="result">
+            <td>Total</td>
+            <td id="total">0</td>
+        </tr>
+        <tr class="result">
+            <td>Percentage</td>
+            <td id="percent">0%</td>
+        </tr>
+    </table>
+
+    <div style="text-align:center;">
+        <button onclick="calculate()">Calculate</button>
+    </div>
+</div>
+
+<script>
+    function calculate() {
+        let inputs = ["eng", "math", "phy", "chem", "it"];
+        let total = 0;
+
+        for (let id of inputs) {
+            let value = Number(document.getElementById(id).value);
+
+            if (value < 0 || value > 100) {
+                alert("Marks must be between 0 and 100");
+                return;
+            }
+            total += value;
+        }
+
+        let percentage = (total / inputs.length).toFixed(2);
+
+        document.getElementById("total").innerText = total;
+        document.getElementById("percent").innerText = percentage + "%";
+    }
+</script>
+
+</body>
+</html>
